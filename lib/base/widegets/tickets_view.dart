@@ -5,17 +5,17 @@ import 'package:my_first_app/base/widegets/big_circle.dart';
 import 'package:my_first_app/base/widegets/big_dot.dart';
 
 class TicketsView extends StatelessWidget {
-
-  const TicketsView({super.key});
+final bool wholeScreen;
+  const TicketsView({super.key,  this.wholeScreen=false, required Map<String, dynamic> ticket});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width * 0.82,
-      height: 290,
+      height: 200,
       child: Container(
-        margin: EdgeInsets.only(right: 16),
+        margin: EdgeInsets.only(right: wholeScreen==true?0:16),
         child: Column(
           children: [
             Container(

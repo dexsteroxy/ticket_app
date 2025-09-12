@@ -5,6 +5,7 @@ import 'package:my_first_app/base/res/styles/app_styles.dart';
 import 'package:my_first_app/base/utils/all_json.dart';
 import 'package:my_first_app/base/widegets/app_double.dart';
 import 'package:my_first_app/base/widegets/tickets_view.dart';
+import 'package:my_first_app/screens/widgets/hotel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +20,9 @@ class HomeScreen extends StatelessWidget {
           Container(
             // color: Colors.blue,
             padding: const EdgeInsets.symmetric(horizontal: 20),
+
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,18 +84,50 @@ class HomeScreen extends StatelessWidget {
                 AppDoubleText(
                   bigText: 'Upcoming Flight',
                   smallText: 'View all',
+                  func: () {
+                    Navigator.pushNamed(context, "/all_tickets");
+                  },
                 ),
                 SizedBox(height: 20),
-                SingleChildScrollView( 
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: 
-                  Row(
-                    children: ticketList.take(4).map((singleticket) =>
-                    
-                    TicketsView()
-                    ).toList()
-                  )
+                  child: Row(
+                    children: ticketList
+                        .take(4)
+                        .map(
+                          (singleticket) => Container(
+                            margin: EdgeInsets.all(0),
+                            padding: EdgeInsets.all(0),
+                            child: TicketsView(ticket: singleticket),
+                          ),
+                        )
+                        .toList(),
                   ),
+                ),
+
+                const SizedBox(height: 40),
+                AppDoubleText(
+                  bigText: 'Hotels',
+                  smallText: 'View all',
+                  func: () {},
+                ),
+
+                SizedBox(height: 20),
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: hotelList
+                        .take(4)
+                        .map(
+                          (singlehotel) => Container(
+                            margin: EdgeInsets.only(right: 16),
+                            child: Hotel(hotel: singlehotel),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                )
               ],
             ),
           ),
